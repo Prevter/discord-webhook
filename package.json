@@ -4,10 +4,6 @@
     "private": true,
     "description": "Simple way to send Discord webhook messages from GitHub Actions",
     "main": "src/index.js",
-    "scripts": {
-        "test": "node src/index.js",
-        "package": "ncc build --source-map --license licenses.txt"
-    },
     "keywords": [
         "discord",
         "webhook",
@@ -16,8 +12,5 @@
     ],
     "author": "Prevter",
     "license": "MIT",
-    "dependencies": {
-        "discord-webhook-node": "^1.1.8",
-        "glob": "^11.0.0"
-    }
+    "dependencies": { "glob": "^11.0.0" }
 }
