@@ -43,9 +43,16 @@ class Webhook {
     }
 
     async send(content) {
+        const formData = await this.buildFormData(content);
+
+        if (this.options.debugPrint) {
+            console.log('Sending webhook:');
+            console.log(this.values); 
+        }
+
         const res = await fetch(this.options.url, {
             method: 'POST',
-            body: await this.buildFormData(content),
+            body: formData,
             headers: { 'Host': 'discord.com', },
         });
 

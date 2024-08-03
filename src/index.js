@@ -137,6 +137,7 @@ function buildEmbed() {
 async function main() {
     const webhookURL = process.env.WEBHOOK_URL;
     const content = process.env.CONTENT.trim();
+    const debugPrint = process.env.DEBUG_PRINT === 'true';
     const filesPatterns = getEnv('FILES');
     const files = [];
 
@@ -158,7 +159,7 @@ async function main() {
     const webhook = new Webhook({
         url: webhookURL,
         throwErrors: true,
-        retryOnLimit: false,
+        debugPrint,
     });
 
     applySetting(webhook, 'setUsername', 'AUTHOR');

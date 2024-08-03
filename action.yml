@@ -93,6 +93,11 @@ inputs:
     required: false
     default: ''
 
+  debug-print:
+    description: 'Print the message to the console before sending'
+    required: false
+    default: false
+
 runs:
   using: 'composite'
   steps:
@@ -126,3 +131,4 @@ runs:
         EMBED_FOOTER: ${{ inputs.embed-footer }}
         EMBED_FOOTER_ICON: ${{ inputs.embed-footer-icon }}
         EMBED_TIMESTAMP: ${{ inputs.embed-timestamp }}
+        DEBUG_PRINT: ${{ inputs.debug-print }}
