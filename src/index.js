@@ -141,12 +141,17 @@ async function main() {
     const files = [];
 
     if (filesPatterns) {
+        const fs = require('fs');
         const patterns = filesPatterns.split('\n');
-        const glob = require('glob');
-
         for (const pattern of patterns) {
-            const filesFound = glob.sync(pattern);
-            files.push(...filesFound);
+            // parse glob pattern (without glob require)
+            const regex = new RegExp(pattern.replace(/\./g, '\\.').replace(/\*/g, '.*'));
+            const filesInPattern = await fs.promises.readdir('.', { withFileTypes: true });
+            for (const file of filesInPattern) {
+                if (file.isFile() && regex.test(file.name)) {
+                    files.push(file.name);
+                }
+            }
         }
     }
 

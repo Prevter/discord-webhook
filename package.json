@@ -11,6 +11,5 @@
         "actions"
     ],
     "author": "Prevter",
-    "license": "MIT",
-    "dependencies": { "glob": "^11.0.0" }
+    "license": "MIT"
 }
