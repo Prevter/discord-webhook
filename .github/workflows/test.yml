@@ -1,0 +1,40 @@
+name: Test the action
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Send a test webhook
+        uses: ./
+        with:
+          webhook-url: ${{ secrets.WEBHOOK_URL }}
+          content: |
+            This is a test message
+            with multiple lines!
+            [Link to GitHub](<https://github.com>)
+          author: 'Epic Webhook'
+          avatar: 'https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png'
+          files: '*.md'
+          embed-title: 'Test Embed'
+          embed-description: 'This is a test embed'
+          embed-url: 'https://github.com/prevter/discord-webhook'
+          embed-author: 'Some Author'
+          embed-author-icon: 'https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png'
+          embed-color: '#FF0000'
+          embed-fields: |
+            first=First field
+            second=Second field
+            third=Third field
+            fourth=Fourth field
+          embed-footer: 'Test Footer'
+          embed-footer-icon: 'https://cdn.prod.website-files.com/6257adef93867e50d84d30e2/636e0a6a49cf127bf92de1e2_icon_clyde_blurple_RGB.png'
+          embed-timestamp: 'now'

@@ -1,0 +1,125 @@
+name: Send Discord Webhook
+description: Send a Discord webhook message
+
+inputs:
+  webhook-url:
+    description: 'The webhook URL to send the message to'
+    required: true
+
+  content:
+    description: 'The content of the message to send'
+    required: false
+    default: ''
+
+  author:
+    description: 'The author of the message'
+    required: false
+    default: ''
+
+  avatar:
+    description: 'The avatar of the author'
+    required: false
+    default: ''
+
+  embed-title:
+    description: 'The title of the embed'
+    required: false
+    default: ''
+
+  embed-description:
+    description: 'The description of the embed'
+    required: false
+    default: ''
+
+  embed-url:
+    description: 'The URL of the embed'
+    required: false
+    default: ''
+
+  embed-author:
+    description: 'The author of the embed'
+    required: false
+    default: ''
+
+  embed-author-icon:
+    description: 'The icon of the author'
+    required: false
+    default: ''
+
+  embed-color:
+    description: 'The color of the embed in hex format (#RRGGBB)'
+    required: false
+    default: ''
+
+  embed-fields:
+    description: |
+      The fields of the embed.
+      Each line should be a field in the format `name=value`.
+      (Max 25 fields)
+    required: false
+    default: ''
+
+  embed-image:
+    description: 'The image of the embed'
+    required: false
+    default: ''
+
+  embed-thumbnail:
+    description: 'The thumbnail of the embed'
+    required: false
+    default: ''
+
+  embed-footer:
+    description: 'The footer of the embed'
+    required: false
+    default: ''
+
+  embed-footer-icon:
+    description: 'The icon of the footer'
+    required: false
+    default: ''
+
+  embed-timestamp:
+    description: 'The timestamp of the embed'
+    required: false
+    default: ''
+
+  files:
+    description: |
+      The files to send with the message.
+      Each line should be a path to a file.
+      Glob patterns are supported.
+      (Max 10 files, 25MB total)
+    required: false
+    default: ''
+
+runs:
+  using: 'composite'
+  steps:
+    - uses: actions/checkout@v4
+    - name: Use Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20.x'
+    - name: Install dependencies
+      run: npm ci
+    - name: Send Discord Webhook
+      run: node src/index.js
+      env:
+        WEBHOOK_URL: ${{ inputs.webhook-url }}
+        CONTENT: ${{ inputs.content }}
+        AUTHOR: ${{ inputs.author }}
+        AVATAR: ${{ inputs.avatar }}
+        FILES: ${{ inputs.files }}
+        EMBED_TITLE: ${{ inputs.embed-title }}
+        EMBED_DESCRIPTION: ${{ inputs.embed-description }}
+        EMBED_URL: ${{ inputs.embed-url }}
+        EMBED_AUTHOR: ${{ inputs.embed-author }}
+        EMBED_AUTHOR_ICON: ${{ inputs.embed-author-icon }}
+        EMBED_COLOR: ${{ inputs.embed-color }}
+        EMBED_FIELDS: ${{ inputs.embed-fields }}
+        EMBED_IMAGE: ${{ inputs.embed-image }}
+        EMBED_THUMBNAIL: ${{ inputs.embed-thumbnail }}
+        EMBED_FOOTER: ${{ inputs.embed-footer }}
+        EMBED_FOOTER_ICON: ${{ inputs.embed-footer-icon }}
+        EMBED_TIMESTAMP: ${{ inputs.embed-timestamp }}
