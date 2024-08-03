@@ -109,6 +109,10 @@ runs:
       uses: actions/setup-node@v4
       with:
         node-version: '20.x'
+
+    - name: Install dependencies
+      shell: bash
+      run: cd discord-webhook && npm install && cd ..
     
     - name: Send Discord Webhook
       shell: bash
