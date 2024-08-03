@@ -131,8 +131,6 @@ function buildEmbed() {
     applySetting(builder, 'setFooterIcon', 'EMBED_FOOTER_ICON');
     applySetting(builder, 'setTimestamp', 'EMBED_TIMESTAMP');
 
-    console.log(builder.embed);
-
     return builder.changed ? builder.embed : null;
 }
 
